@@ -23,12 +23,12 @@ class NetworkFlowAlignment : AlignmentInterface {
         for ((index, user) in users.withIndex()) {
             if (user.balance > 0) {
                 edges.add(Edge(source, index, user.balance))
-                edges.add(Edge(index, source, 0)) // reverse edge for residual graph
+                edges.add(Edge(index, source, 0))
                 adj[source].add(edges.lastIndex - 1)
                 adj[index].add(edges.lastIndex)
             } else if (user.balance < 0) {
                 edges.add(Edge(index, sink, -user.balance))
-                edges.add(Edge(sink, index, 0)) // reverse edge for residual graph
+                edges.add(Edge(sink, index, 0))
                 adj[index].add(edges.lastIndex - 1)
                 adj[sink].add(edges.lastIndex)
             }
@@ -38,7 +38,7 @@ class NetworkFlowAlignment : AlignmentInterface {
             for (j in 0 until n) {
                 if (users[i].balance > 0 && users[j].balance < 0) {
                     edges.add(Edge(i, j, Long.MAX_VALUE))
-                    edges.add(Edge(j, i, 0)) // reverse edge for residual graph
+                    edges.add(Edge(j, i, 0))
                     adj[i].add(edges.lastIndex - 1)
                     adj[j].add(edges.lastIndex)
                 }
